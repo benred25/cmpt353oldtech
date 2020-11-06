@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
-    host: 'CFdb',
+    host: 'shopDataBase',
     user: 'root',
     password: 'admin',
     database: 'coffeeShop'
