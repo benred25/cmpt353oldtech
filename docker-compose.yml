@@ -3,7 +3,7 @@ services:
 
     mysql1:
         image: mysql:5.7.31
-        container_name: CFdb
+        container_name: shopDataBase
         ports:
             - "3306:3306"
         environment:
@@ -14,7 +14,7 @@ services:
         build: .
         depends_on:
             - mysql1
-        container_name: CFs
+        container_name: shopServer
         ports:
             - "8080:8080"
         volumes: 
