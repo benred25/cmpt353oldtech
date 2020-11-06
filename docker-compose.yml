@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+    mysql1:
+        image: mysql:5.7.31
+        container_name: CFdb
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: coffeeShop
+
+    node1:
+        build: .
+        depends_on:
+            - mysql1
+        container_name: CFs
+        ports:
+            - "8080:8080"
+        volumes: 
+            - /home/ben/Documents/cmpt353project/oldtech:/usr/src/app
