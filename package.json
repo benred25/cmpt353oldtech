@@ -1,0 +1,28 @@
+{
+  "name": "cmpt353oldtech",
+  "version": "1.0.0",
+  "description": "Coffee shop using tech taught in class",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benred25/cmpt353oldtech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benred25/cmpt353oldtech/issues"
+  },
+  "homepage": "https://github.com/benred25/cmpt353oldtech#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
