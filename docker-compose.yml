@@ -18,4 +18,4 @@ services:
         ports:
             - "8080:8080"
         volumes: 
-            - /home/ben/Documents/cmpt353project/oldtech:/usr/src/app
+            - /home/ben/Documents/353gitrepo/cmpt353oldtech:/usr/src/app

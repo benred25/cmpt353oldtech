@@ -18,7 +18,7 @@ xmlhttp.onreadystatechange = function() {
 
         var table = "<table border='1' id='menu-table' >"
             for(x in myObj) {
-                table += "<tr> <td> " + myObj[x].Item + "</td> <td>" + myObj[x].Price + "</td> </tr>";
+                table += "<tr> <td> " + myObj[x].item + "</td> <td>" + myObj[x].price + "</td> </tr>";
             }
             table += "</table>"
             document.getElementById("menu").innerHTML = table;
