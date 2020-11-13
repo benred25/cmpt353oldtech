@@ -8,6 +8,8 @@
 
 <p id="menu"> </p> 
 
+<p id="selected"></p>
+
 <script>
 
 xmlhttp = new XMLHttpRequest();
@@ -23,6 +25,11 @@ xmlhttp.onreadystatechange = function() {
             table += "</table>"
             document.getElementById("menu").innerHTML = table;
 
+            onRowClick("menu-table", function (row){
+                var value = row.getElementsByTagName("td")[0].innerHTML;
+                document.getElementById('selected').innerHTML = value;
+            });
+
     }
 };
 
@@ -32,6 +39,25 @@ xmlhttp.send();
 
 
 
+</script>
+
+
+</script>
+
+<script type="text/javascript">
+    function onRowClick(tableId, callback) {
+       var table = document.getElementById(tableId),
+          rows = table.getElementsByTagName("tr"),
+          i;
+       for (i = 0; i < rows.length; i++) {
+           table.rows[i].onclick = function (row) {
+              return function () {
+                 callback(row);
+              };
+           }(table.rows[i]);
+       }
+   };
+  
 </script>
 
 </body>

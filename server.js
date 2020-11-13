@@ -24,6 +24,16 @@ app.get('/', (req,res) => {
          console.log('from root')
 });
 
+app.get('/create', (req, res) => {
+
+  var sql = "CREATE TABLE menu (item VARCHAR(50), price FLOAT)";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+  });
+   
+  res.send("table created");
+});
+
 app.get('/select', (req, res) => {
 
     var sql = 'SELECT * FROM menu';
