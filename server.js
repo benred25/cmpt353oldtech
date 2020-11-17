@@ -51,8 +51,12 @@ app.get('/select', (req, res) => {
 app.post('/insertOrder', (req, res) => {
 
   var items = req.body.items;
+  var price = req.body.price;
+  console.log(items);
+  console.log(price);
+  price = price.substring(1);
 
-  var sql = `INSERT INTO orders (items, price) VALUES ('${items}', '10')`;
+  var sql = `INSERT INTO orders (items, price) VALUES ('${items}', '${price}')`;
 
   con.query(sql, function (err, result) {
     if (err) throw err;

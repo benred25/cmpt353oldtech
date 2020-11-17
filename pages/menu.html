@@ -6,7 +6,7 @@
 <body>
 <H1>Menu</H1>
 
-<p id="menu"> </p> 
+<p id="menu"></p> 
 
 <p id="selected"></p>
 
@@ -25,7 +25,7 @@ xmlhttp.onreadystatechange = function() {
 
         var table = "<table border='1' id='menu-table' >"
             for(x in myObj) {
-                table += "<tr> <td> " + myObj[x].item + "</td> <td>" + myObj[x].price + "</td> </tr>";
+                table += "<tr> <td>" + myObj[x].item + "</td> <td>" + myObj[x].price + "</td> </tr>";
             }
             table += "</table>"
             document.getElementById("menu").innerHTML = table;
@@ -34,7 +34,7 @@ xmlhttp.onreadystatechange = function() {
                 var item = row.getElementsByTagName("td")[0].innerHTML;
                 var price = row.getElementsByTagName("td")[1].innerHTML;
                 curPrice = curPrice + parseFloat(price);
-                document.getElementById('selected').innerHTML += item;
+                document.getElementById('selected').innerHTML += item+" ";
                 document.getElementById("price").innerHTML = "$" + curPrice;
             });
 
@@ -68,7 +68,7 @@ xmlhttp.send();
 
     function addOrder() {
         xmlhttp = new XMLHttpRequest();
-        var params = 'items=' + document.getElementById("selected").innerHTML;
+        var params = 'items=' + document.getElementById("selected").innerHTML + '&price=' + document.getElementById("price").innerHTML;
         xmlhttp.open("POST", "http://localhost:8080/insertOrder", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send(params)
