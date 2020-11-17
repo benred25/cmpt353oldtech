@@ -4,11 +4,15 @@
 
 
 <body>
-<H1> Menu</H1>
+<H1>Menu</H1>
 
 <p id="menu"> </p> 
 
 <p id="selected"></p>
+
+<p id="price">$0.00</p>
+
+<button onclick="addOrder()">Confirm Order</button>
 
 <script>
 
@@ -17,6 +21,7 @@ xmlhttp.onreadystatechange = function() {
     if(this.readyState == 4 && this.status == 200) {
 
         myObj = JSON.parse(this.responseText);
+        var curPrice = 0;
 
         var table = "<table border='1' id='menu-table' >"
             for(x in myObj) {
@@ -25,9 +30,12 @@ xmlhttp.onreadystatechange = function() {
             table += "</table>"
             document.getElementById("menu").innerHTML = table;
 
-            onRowClick("menu-table", function (row){
-                var value = row.getElementsByTagName("td")[0].innerHTML;
-                document.getElementById('selected').innerHTML = value;
+            onRowClick("menu-table", function (row) {
+                var item = row.getElementsByTagName("td")[0].innerHTML;
+                var price = row.getElementsByTagName("td")[1].innerHTML;
+                curPrice = curPrice + parseFloat(price);
+                document.getElementById('selected').innerHTML += item;
+                document.getElementById("price").innerHTML = "$" + curPrice;
             });
 
     }
@@ -37,14 +45,10 @@ xmlhttp.open("GET", "http://localhost:8080/select", true);
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xmlhttp.send();
 
-
-
-</script>
-
-
 </script>
 
 <script type="text/javascript">
+
     function onRowClick(tableId, callback) {
        var table = document.getElementById(tableId),
           rows = table.getElementsByTagName("tr"),
@@ -54,10 +58,25 @@ xmlhttp.send();
               return function () {
                  callback(row);
               };
-           }(table.rows[i]);
+           } (table.rows[i]);
        }
    };
   
+</script>
+
+<script>
+
+    function addOrder() {
+        xmlhttp = new XMLHttpRequest();
+        var params = 'items=' + document.getElementById("selected").innerHTML;
+        xmlhttp.open("POST", "http://localhost:8080/insertOrder", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send(params)
+        document.getElementById("selected").innerHTML = "";
+        document.getElementById("price").innerHTML = "$0.00";
+        curPrice = 0;
+    };
+
 </script>
 
 </body>

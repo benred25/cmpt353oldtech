@@ -20,15 +20,17 @@ const con = mysql.createConnection({
 });
  
 app.get('/', (req,res) => {
-         res.send('hello world from root!');
-         console.log('from root')
+  res.send('hello world from root!');
+  console.log('from root')
 });
 
 app.get('/create', (req, res) => {
 
   var sql = "CREATE TABLE menu (item VARCHAR(50), price FLOAT)";
+
   con.query(sql, function (err, result) {
     if (err) throw err;
+
   });
    
   res.send("table created");
@@ -36,13 +38,29 @@ app.get('/create', (req, res) => {
 
 app.get('/select', (req, res) => {
 
-    var sql = 'SELECT * FROM menu';
-    con.query(sql, function (err, result, fields) {
-      if (err) throw err;
+  var sql = 'SELECT * FROM menu';
 
+  con.query(sql, function (err, result, fields) {
+      if (err) throw err;
       res.json(result);
+
     });
-    
+
+});
+
+app.post('/insertOrder', (req, res) => {
+
+  var items = req.body.items;
+
+  var sql = `INSERT INTO orders (items, price) VALUES ('${items}', '10')`;
+
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("order insert success");
+  });
+
+  res.sendFile(PATH + "menu.html");
+
 });
 
 app.use('/', express.static('pages'));
