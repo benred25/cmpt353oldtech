@@ -9,20 +9,27 @@
     <p id="orders"></p>
 
     <script>
+        // script to display all the orders to the page
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if(this.readyState == 4 && this.status == 200) {
 
                 var allOrders = JSON.parse(this.responseText);
 
-                var table = "<table border='1' id='orders-table'><tr><td>Items</td><td>Price</td></tr>"
+                var table = "<table border='1' id='orders-table'><tr><td>Items</td><td>Price</td><td>Time</td><td>Status</td></tr>"
                 for (x in allOrders) {
                     var itemsArr = allOrders[x].items.split(" ")
                     table += "<tr><td>"
                     for (var i = 0; i < itemsArr.length; i++) {
                         table += itemsArr[i] + "<br>"
                     }
-                    table += "</td><td>$" + allOrders[x].price + "</td></tr>"
+                    var is_complete;
+                    if (allOrders[x].complete == 0) {
+                        is_complete = "Pending";
+                    } else {
+                        is_complete = "Complete";
+                    }
+                    table += "</td><td>$" + allOrders[x].price + "</td><td>" + allOrders[x].timestamp + "</td><td>" + is_complete + "</td></tr>"
                 }
                 table += "</table>"
                 document.getElementById("orders").innerHTML = table;
