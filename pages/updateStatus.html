@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Coffee Shop</title>
+</head>
+
+<body>
+    <form action="http://localhost:8080/home" method="GET">
+        <button type="submit" value="Submit">Home</button>
+    </form>
+
+    <form action="http://localhost:8080/editMenu" method="GET">
+        <button type="submit" value="Submit">Edit Menu</button>
+    </form>
+
+    <p id="orders"></p>
+
+    <script>
+        // script to display all the orders to the page
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if(this.readyState == 4 && this.status == 200) {
+
+                var allOrders = JSON.parse(this.responseText);
+
+                var table = "<table border='1' id='orders-table'><tr><td>Order ID</td><td>Items</td><td>Price</td><td>Time</td><td>Status</td></tr>"
+                for (x in allOrders) {
+                    var itemsArr = allOrders[x].items.split(" ");
+                    table += `<tr><td id='${allOrders[x].id}'>` + allOrders[x].id + `</td><td>`
+                    for (var i = 0; i < itemsArr.length; i++) {
+                        table += itemsArr[i] + "<br>"
+                    }
+                    var is_complete = "Complete";
+                    if (allOrders[x].complete === 0) {
+                        is_complete = "Pending";
+                    }
+                    table += "</td><td>$" + allOrders[x].price + "</td><td>" + allOrders[x].timestamp + "</td><td>" +
+                        is_complete + `</td><td><button onclick='completeOrder(${allOrders[x].id})'>Complete</button></td></tr>`
+                }
+                table += "</table>"
+                document.getElementById("orders").innerHTML = table;
+            }
+        }
+
+        xmlhttp.open("GET", "http://localhost:8080/selectOrders", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send();
+
+    </script>
+
+    <script>
+        function completeOrder(id) {
+            xmlhttp = new XMLHttpRequest();
+            var params = 'id='+id;
+            xmlhttp.open("POST", "http://localhost:8080/completeOrder", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send(params);
+        }
+    </script>
+
+
+</body>
+
+
+
+
+
+</html>

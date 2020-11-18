@@ -114,6 +114,19 @@ app.post('/deleteOrder', (req, res) => {
     res.sendFile(PATH + 'status.html');
 });
 
+app.post('/completeOrder', (req, res) => {
+    var id = req.body.id;
+
+    var sql = `UPDATE orders SET complete = '1' WHERE id = ${id}`
+
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("order updated");
+    });
+
+    res.sendFile(PATH + "updateStatus.html");
+});
+
 app.get('/status', (req, res) => {
     console.log("moving to status.html");
     res.sendFile(PATH + 'status.html');
