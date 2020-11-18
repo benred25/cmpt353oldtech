@@ -4,13 +4,36 @@
 
 <body>
 
-<h1>Orders</h1>
+    <h1>Orders</h1>
 
-<p id="orders"></p>
+    <p id="orders"></p>
 
-<script>
+    <script>
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if(this.readyState == 4 && this.status == 200) {
 
-</script>
+                var allOrders = JSON.parse(this.responseText);
+
+                var table = "<table border='1' id='orders-table'><tr><td>Items</td><td>Price</td></tr>"
+                for (x in allOrders) {
+                    var itemsArr = allOrders[x].items.split(" ")
+                    table += "<tr><td>"
+                    for (var i = 0; i < itemsArr.length; i++) {
+                        table += itemsArr[i] + "<br>"
+                    }
+                    table += "</td><td>$" + allOrders[x].price + "</td></tr>"
+                }
+                table += "</table>"
+                document.getElementById("orders").innerHTML = table;
+            }
+        }
+
+        xmlhttp.open("GET", "http://localhost:8080/selectOrders", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send();
+
+    </script>
 
 </body>
 

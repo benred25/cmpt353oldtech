@@ -4,80 +4,80 @@
 
 
 <body>
-<H1>Menu</H1>
+    <H1>Menu</H1>
 
-<p id="menu"></p> 
+    <p id="menu"></p>
 
-<p id="selected"></p>
+    <p id="selected"></p>
 
-<p id="price">$0.00</p>
+    <p id="price">$0.00</p>
 
-<button onclick="addOrder()">Confirm Order</button>
+    <button onclick="addOrder()">Confirm Order</button>
 
-<script>
+    <script>
 
-xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-    if(this.readyState == 4 && this.status == 200) {
-
-        myObj = JSON.parse(this.responseText);
-        var curPrice = 0;
-
-        var table = "<table border='1' id='menu-table' >"
-            for(x in myObj) {
-                table += "<tr> <td>" + myObj[x].item + "</td> <td>" + myObj[x].price + "</td> </tr>";
-            }
-            table += "</table>"
-            document.getElementById("menu").innerHTML = table;
-
-            onRowClick("menu-table", function (row) {
-                var item = row.getElementsByTagName("td")[0].innerHTML;
-                var price = row.getElementsByTagName("td")[1].innerHTML;
-                curPrice = curPrice + parseFloat(price);
-                document.getElementById('selected').innerHTML += item+" ";
-                document.getElementById("price").innerHTML = "$" + curPrice;
-            });
-
-    }
-};
-
-xmlhttp.open("GET", "http://localhost:8080/selectMenu", true);
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send();
-
-</script>
-
-<script type="text/javascript">
-
-    function onRowClick(tableId, callback) {
-       var table = document.getElementById(tableId),
-          rows = table.getElementsByTagName("tr"),
-          i;
-       for (i = 0; i < rows.length; i++) {
-           table.rows[i].onclick = function (row) {
-              return function () {
-                 callback(row);
-              };
-           } (table.rows[i]);
-       }
-   };
-  
-</script>
-
-<script>
-
-    function addOrder() {
         xmlhttp = new XMLHttpRequest();
-        var params = 'items=' + document.getElementById("selected").innerHTML + '&price=' + document.getElementById("price").innerHTML;
-        xmlhttp.open("POST", "http://localhost:8080/insertOrder", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send(params)
-        document.getElementById("selected").innerHTML = "";
-        document.getElementById("price").innerHTML = "$0.00";
-        curPrice = 0;
-    };
+        var curPrice = 0;
+        xmlhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
 
-</script>
+                var allMenu = JSON.parse(this.responseText);
+
+                var table = "<table border='1' id='menu-table' >"
+                    for(x in allMenu) {
+                        table += "<tr> <td>" + allMenu[x].item + "</td> <td>" + allMenu[x].price + "</td> </tr>";
+                    }
+                    table += "</table>"
+                    document.getElementById("menu").innerHTML = table;
+
+                    onRowClick("menu-table", function (row) {
+                        var item = row.getElementsByTagName("td")[0].innerHTML;
+                        var price = row.getElementsByTagName("td")[1].innerHTML;
+                        curPrice = curPrice + parseFloat(price);
+                        document.getElementById('selected').innerHTML += item+" ";
+                        document.getElementById("price").innerHTML = "$" + curPrice;
+                    });
+
+            }
+        };
+
+        xmlhttp.open("GET", "http://localhost:8080/selectMenu", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send();
+
+    </script>
+
+    <script type="text/javascript">
+
+        function onRowClick(tableId, callback) {
+           var table = document.getElementById(tableId),
+              rows = table.getElementsByTagName("tr"),
+              i;
+           for (i = 0; i < rows.length; i++) {
+               table.rows[i].onclick = function (row) {
+                  return function () {
+                     callback(row);
+                  };
+               } (table.rows[i]);
+           }
+       }
+
+    </script>
+
+    <script>
+
+        function addOrder() {
+            xmlhttp = new XMLHttpRequest();
+            var params = 'items=' + document.getElementById("selected").innerHTML + '&price=' + document.getElementById("price").innerHTML;
+            xmlhttp.open("POST", "http://localhost:8080/insertOrder", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send(params)
+            document.getElementById("selected").innerHTML = "";
+            document.getElementById("price").innerHTML = "$0.00";
+            curPrice = 0;
+        }
+
+    </script>
 
 </body>
 

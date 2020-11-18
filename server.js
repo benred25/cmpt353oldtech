@@ -46,7 +46,7 @@ app.get('/selectMenu', (req, res) => {
 
 });
 
-app.get('selectOrders', (req, res) => {
+app.get('/selectOrders', (req, res) => {
 
     var sql = 'SELECT * FROM orders';
 
