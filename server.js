@@ -20,50 +20,58 @@ const con = mysql.createConnection({
 });
  
 app.get('/', (req,res) => {
-  res.send('hello world from root!');
-  console.log('from root')
+    res.send('hello world from root!');
+    console.log('from root')
 });
 
 app.get('/create', (req, res) => {
 
-  var sql = "CREATE TABLE menu (item VARCHAR(50), price FLOAT)";
+    var sql = "CREATE TABLE menu (item VARCHAR(50), price FLOAT)";
 
-  con.query(sql, function (err, result) {
-    if (err) throw err;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+    });
 
-  });
-   
-  res.send("table created");
+    res.send("table created");
 });
 
-app.get('/select', (req, res) => {
+app.get('/selectMenu', (req, res) => {
 
-  var sql = 'SELECT * FROM menu';
+    var sql = 'SELECT * FROM menu';
 
-  con.query(sql, function (err, result, fields) {
-      if (err) throw err;
-      res.json(result);
-
+    con.query(sql, function (err, result, fields) {
+        if (err) throw err;
+        res.json(result);
     });
 
 });
 
+app.get('selectOrders', (req, res) => {
+
+    var sql = 'SELECT * FROM orders';
+
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        res.json(result);
+    });
+});
+
 app.post('/insertOrder', (req, res) => {
 
-  var items = req.body.items;
-  var price = req.body.price;
-  console.log(items);
-  console.log(price);
-  price = price.substring(1);
+    var items = req.body.items;
+    var price = req.body.price;
+    console.log(items);
+    console.log(price);
+    price = price.substring(1);
 
-  var sql = `INSERT INTO orders (items, price) VALUES ('${items}', '${price}')`;
+    var sql = `INSERT INTO orders (items, price) VALUES ('${items}', '${price}')`;
 
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("order insert success");
-  });
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("order insert success");
+    });
 
-  res.sendFile(PATH + "menu.html");
+    res.sendFile(PATH + "menu.html");
 
 });
 
