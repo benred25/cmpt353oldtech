@@ -3,11 +3,23 @@
 <html>
 
 <body>
+    <form action="http://localhost:8080/home" method="GET">
+        <button type="submit" value="Submit">Home</button>
+    </form>
 
     <h1>Orders</h1>
 
     <form action="http://localhost:8080/menu" method="GET">
         <button type="submit" value="Submit">View Menu</button>
+    </form>
+
+    <form action="http://localhost:8080/deleteOrder" method="POST">
+        <fieldset>
+            <legend>Cancel Order</legend>
+            <label for="id">ID</label><br />
+            <input name="id" type="text"/> <br />
+            <button type="submit" value="Submit">Cancel</button>
+        </fieldset>
     </form>
 
     <p id="orders"></p>
@@ -20,10 +32,10 @@
 
                 var allOrders = JSON.parse(this.responseText);
 
-                var table = "<table border='1' id='orders-table'><tr><td>Items</td><td>Price</td><td>Time</td><td>Status</td></tr>"
+                var table = "<table border='1' id='orders-table'><tr><td>Order ID</td><td>Items</td><td>Price</td><td>Time</td><td>Status</td></tr>"
                 for (x in allOrders) {
-                    var itemsArr = allOrders[x].items.split(" ")
-                    table += "<tr><td>"
+                    var itemsArr = allOrders[x].items.split(" ");
+                    table += "<tr><td>" + allOrders[x].id + "</td><td>"
                     for (var i = 0; i < itemsArr.length; i++) {
                         table += itemsArr[i] + "<br>"
                     }

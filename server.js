@@ -20,19 +20,20 @@ const con = mysql.createConnection({
 });
  
 app.get('/', (req,res) => {
-    res.send('hello world from root!');
-    console.log('from root')
-});
+    var sql1 = "CREATE TABLE menu (id INT NOT NULL AUTO_INCREMENT, item VARCHAR(50), price FLOAT, PRIMARY KEY (id))";
 
-app.get('/create', (req, res) => {
-
-    var sql = "CREATE TABLE menu (item VARCHAR(50), price FLOAT)";
-
-    con.query(sql, function (err, result) {
+    con.query(sql1, function (err, result) {
         if (err) throw err;
     });
 
-    res.send("table created");
+    var sql2 = "CREATE TABLE orders (id INT NOT NULL AUTO_INCREMENT, items VARCHAR(255), price FLOAT, timestamp TIMESTAMP NOT NULL, complete TINYINT(1) DEFAULT 0, PRIMARY KEY (id))";
+
+    con.query(sql2, function (err, result) {
+        if (err) throw err;
+    });
+
+    console.log('tables created')
+    res.sendFile(PATH + 'home.html');
 });
 
 app.get('/selectMenu', (req, res) => {
@@ -58,7 +59,20 @@ app.post('/insertMenu', (req, res) => {
     });
 
     res.sendFile(PATH + 'editMenu.html');
-})
+});
+
+app.post('/deleteMenu', (req, res) => {
+    var id = req.body.id;
+
+    var sql = `DELETE FROM menu WHERE id='${id}'`;
+
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("item deleted from menu");
+    });
+
+    res.sendFile(PATH + 'editMenu.html');
+});
 
 app.get('/selectOrders', (req, res) => {
 
@@ -87,6 +101,19 @@ app.post('/insertOrder', (req, res) => {
 
 });
 
+app.post('/deleteOrder', (req, res) => {
+    var id = req.body.id;
+
+    var sql = `DELETE FROM orders WHERE id='${id}'`;
+
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("order deleted from orders");
+    });
+
+    res.sendFile(PATH + 'status.html');
+});
+
 app.get('/status', (req, res) => {
     console.log("moving to status.html");
     res.sendFile(PATH + 'status.html');
@@ -105,6 +132,11 @@ app.get('/editMenu', (req, res) => {
 app.get('/updateStatus', (req, res) => {
     console.log("moving to updateStatus.html");
     res.sendFile(PATH + 'updateStatus.html');
+});
+
+app.get('/home', (req, res) => {
+    console.log("moving to home.html");
+    res.sendFile(PATH + 'home.html');
 });
 
 

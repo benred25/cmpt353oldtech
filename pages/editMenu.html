@@ -3,17 +3,30 @@
 <html>
 
 <body>
+    <form action="http://localhost:8080/home" method="GET">
+        <button type="submit" value="Submit">Home</button>
+    </form>
 
     <h1>Edit Menu</h1>
 
+
     <form action="http://localhost:8080/insertMenu" method="POST">
-        <fieldset>
+        <fieldset id="field1">
             <legend>Add Item</legend>
             <label for="item">Item</label><br />
             <input name="item" type="text"/> <br />
             <label for="price">Price</label><br />
             <input name="price" type="text"/> <br />
             <button type="submit" value="Submit">Add</button>
+        </fieldset>
+    </form>
+
+    <form action="http://localhost:8080/deleteMenu" method="POST">
+        <fieldset id="field2">
+            <legend>Delete Item</legend>
+            <label for="id">ID</label><br />
+            <input name="id" type="text"/> <br />
+            <button type="submit" value="Submit">Delete</button>
         </fieldset>
     </form>
 
@@ -33,7 +46,7 @@
 
                 var table = "<table border='1' id='menu-table' >"
                 for (x in allMenu) {
-                    table += "<tr> <td>" + allMenu[x].item + "</td> <td>" + allMenu[x].price + "</td> </tr>";
+                    table += "<tr> <td>" + allMenu[x].id + "</td> <td>" + allMenu[x].item + "</td> <td>" + allMenu[x].price + "</td> </tr>";
                 }
                 table += "</table>"
                 document.getElementById("menu").innerHTML = table;
