@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+    <h1>Edit Menu</h1>
+
+    <form action="http://localhost:8080/insertMenu" method="POST">
+        <fieldset>
+            <legend>Add Item</legend>
+            <label for="item">Item</label><br />
+            <input name="item" type="text"/> <br />
+            <label for="price">Price</label><br />
+            <input name="price" type="text"/> <br />
+            <button type="submit" value="Submit">Add</button>
+        </fieldset>
+    </form>
+
+    <p id="menu"></p>
+
+
+
+
+
+    <script>
+
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                var allMenu = JSON.parse(this.responseText);
+
+                var table = "<table border='1' id='menu-table' >"
+                for (x in allMenu) {
+                    table += "<tr> <td>" + allMenu[x].item + "</td> <td>" + allMenu[x].price + "</td> </tr>";
+                }
+                table += "</table>"
+                document.getElementById("menu").innerHTML = table;
+            }
+        }
+
+        xmlhttp.open("GET", "http://localhost:8080/selectMenu", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send();
+
+    </script>
+
+
+
+
+
+
+</body>
+
+
+
+</html>

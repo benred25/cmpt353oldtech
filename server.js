@@ -46,6 +46,20 @@ app.get('/selectMenu', (req, res) => {
 
 });
 
+app.post('/insertMenu', (req, res) => {
+    var item = req.body.item;
+    var price = req.body.price;
+
+    var sql = `INSERT INTO menu (item, price) VALUES ('${item}', '${price}')`;
+
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("item added to menu");
+    });
+
+    res.sendFile(PATH + 'editMenu.html');
+})
+
 app.get('/selectOrders', (req, res) => {
 
     var sql = 'SELECT * FROM orders';
@@ -60,8 +74,6 @@ app.post('/insertOrder', (req, res) => {
 
     var items = req.body.items;
     var price = req.body.price;
-    console.log(items);
-    console.log(price);
     price = price.substring(1);
 
     var sql = `INSERT INTO orders (items, price) VALUES ('${items}', '${price}')`;
@@ -74,6 +86,27 @@ app.post('/insertOrder', (req, res) => {
     res.sendFile(PATH + "menu.html");
 
 });
+
+app.get('/status', (req, res) => {
+    console.log("moving to status.html");
+    res.sendFile(PATH + 'status.html');
+});
+
+app.get('/menu', (req, res) => {
+    console.log("moving to menu.html");
+    res.sendFile(PATH + 'menu.html');
+});
+
+app.get('/editMenu', (req, res) => {
+    console.log("moving to editMenu.html");
+    res.sendFile(PATH + 'editMenu.html');
+});
+
+app.get('/updateStatus', (req, res) => {
+    console.log("moving to updateStatus.html");
+    res.sendFile(PATH + 'updateStatus.html');
+});
+
 
 app.use('/', express.static('pages'));
    

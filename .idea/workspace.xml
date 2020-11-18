@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="925abe7c-177a-4c7a-99b1-b17f763c5c7b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pages/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/editMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/editMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/menu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/status.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/status.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -20,9 +49,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cmpt353asn3/pages/posting.html" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -33,18 +63,34 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605656275291</updated>
-      <workItem from="1605656276843" duration="5233000" />
+      <workItem from="1605656276843" duration="5458000" />
+      <workItem from="1605732030940" duration="3907000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="454" y="271" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605660534309">
       <screen x="72" y="27" width="1848" height="1173" />
     </state>
     <state x="454" y="271" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1173@72.27.1848.1173" timestamp="1605660534309" />
+    <state x="779" y="371" width="424" height="491" key="FileChooserDialogImpl" timestamp="1605732413476">
+      <screen x="72" y="27" width="1848" height="1173" />
+    </state>
+    <state x="779" y="371" width="424" height="491" key="FileChooserDialogImpl/72.27.1848.1173@72.27.1848.1173" timestamp="1605732413476" />
     <state x="302" y="244" width="1468" height="956" key="dock-window-1" timestamp="1605658486542">
       <screen x="72" y="27" width="1848" height="1173" />
     </state>

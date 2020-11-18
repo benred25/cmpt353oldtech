@@ -14,6 +14,10 @@
 
     <button onclick="addOrder()">Confirm Order</button>
 
+    <form action="http://localhost:8080/status" method="GET">
+        <button type="submit" value="Submit">View Orders</button>
+    </form>
+
     <script>
 
         xmlhttp = new XMLHttpRequest();
@@ -71,7 +75,8 @@
             var params = 'items=' + document.getElementById("selected").innerHTML + '&price=' + document.getElementById("price").innerHTML;
             xmlhttp.open("POST", "http://localhost:8080/insertOrder", true);
             xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send(params)
+            xmlhttp.send(params);
+            alert("Order placed successfully");
             document.getElementById("selected").innerHTML = "";
             document.getElementById("price").innerHTML = "$0.00";
             curPrice = 0;
